@@ -1,0 +1,49 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+        && get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.role == 'teacher'
+        && get(/databases/$(database)/documents/adminSettings/main).data.active == true
+        && get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.authVersion
+          == get(/databases/$(database)/documents/adminSettings/main).data.authVersion;
+    }
+    function owns(studentId) {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/memberships/$(request.auth.uid))
+        && get(/databases/$(database)/documents/memberships/$(request.auth.uid)).data.studentId == studentId
+        && get(/databases/$(database)/documents/students/$(studentId)).data.active == true
+        && get(/databases/$(database)/documents/memberships/$(request.auth.uid)).data.get('authVersion', 0)
+          == get(/databases/$(database)/documents/students/$(studentId)).data.get('authVersion', 0);
+    }
+    function validEntry() {
+      let value = request.resource.data;
+      return value.keys().hasAll(['date', 'description', 'kind', 'amount', 'createdAt'])
+        && value.keys().hasOnly(['date', 'description', 'kind', 'amount', 'createdAt'])
+        && value.date is string
+        && value.date.matches('^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$')
+        && value.date >= '1900-01-01' && value.date <= '2100-12-31'
+        && value.description is string && value.description.size() > 0 && value.description.size() <= 80
+        && value.kind in ['income', 'expense']
+        && value.amount is int && value.amount > 0 && value.amount <= 999999999
+        && value.createdAt is int && value.createdAt >= 0 && value.createdAt <= request.time.toMillis() + 60000;
+    }
+    match /memberships/{uid} {
+      allow get: if request.auth != null && request.auth.uid == uid;
+    }
+    match /admins/{uid} {
+      allow get: if request.auth != null && request.auth.uid == uid;
+    }
+    match /students/{studentId} {
+      allow read: if isAdmin();
+    }
+    match /students/{studentId}/entries/{entryId} {
+      allow read, delete: if isAdmin() || owns(studentId);
+      allow create: if (isAdmin() || owns(studentId)) && validEntry();
+      allow update: if (isAdmin() || owns(studentId)) && validEntry() && request.resource.data.createdAt == resource.data.createdAt;
+    }
+    // Credentials, roster, rate limits and memberships can only be written by Admin SDK.
+    match /{document=**} { allow read, write: if false; }
+  }
+}
