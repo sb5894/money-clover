@@ -1,0 +1,89 @@
+.language-switch { display: flex; flex-shrink: 0; gap: 3px; padding: 3px; border: 1px solid #dce6d0; border-radius: 11px; background: #f6faef; }
+.language-switch button { min-height: 38px; padding: 7px 10px; border-radius: 8px; font-size: 12px; white-space: nowrap; }
+.language-switch button[aria-pressed="true"] { background: #dfeccf; color: #466638; font-weight: 650; }
+.modal-language { display: flex; justify-content: flex-end; margin: -5px 0 12px; }
+.app-shell:has(.modal-backdrop) .topbar .language-switch { visibility: hidden; }
+.currency-hint { font-size: 11px; line-height: 1.7; color: #748765; }
+.modal-heading { gap: 8px; }
+.modal-heading h2, .modal-description, .privacy-note, .field-hint { overflow-wrap: anywhere; }
+.primary-button { padding: 12px; }
+.account-actions { gap: 12px; }
+html[lang="ru"] { font-family: Arial, 'Noto Sans KR', sans-serif; }
+html[lang="ru"] .greeting h1, html[lang="ru"] .admin-page-heading h1, html[lang="ru"] .little-note p { font-family: inherit; letter-spacing: -.4px; }
+html[lang="ru"] .brand { white-space: normal; font-size: 21px; letter-spacing: -.4px; }
+html[lang="ru"] .brand small { line-height: 1.5; }
+html[lang="ru"] .eyebrow { letter-spacing: 1px; }
+html[lang="ru"] .breadcrumb { flex-wrap: wrap; gap: 6px; }
+html[lang="ru"] .preview-label { display: none; }
+html[lang="ru"] .greeting h1 { font-size: 30px; }
+html[lang="ru"] .greeting p { line-height: 1.7; }
+html[lang="ru"] .today-label { white-space: nowrap; margin-left: 12px; }
+html[lang="ru"] .overview { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+html[lang="ru"] .balance-copy { flex-shrink: 1; max-width: 100%; }
+html[lang="ru"] .balance-caption { max-width: 250px; line-height: 1.7; }
+html[lang="ru"] .clover-scene { opacity: .5; }
+html[lang="ru"] .month-footer { line-height: 1.7; }
+html[lang="ru"] .mini-leaves { display: none; }
+html[lang="ru"] .section-heading>div { flex-wrap: wrap; gap: 6px; }
+html[lang="ru"] .daily-total { gap: 14px; }
+html[lang="ru"] .daily-total>b { flex-shrink: 0; }
+html[lang="ru"] .daily-total>span>small { display: block; margin: 5px 0 0; }
+html[lang="ru"] .ledger-table td { overflow-wrap: anywhere; }
+html[lang="ru"] .entry-name>span:nth-child(2) { word-break: normal; }
+html[lang="ru"] .field-hint, html[lang="ru"] .privacy-note { line-height: 1.7; align-items: flex-start; }
+html[lang="ru"] .bottom-note b, html[lang="ru"] .bottom-note p { line-height: 1.7; }
+html[lang="ru"] .stats-highlight { flex-wrap: wrap; }
+html[lang="ru"] .admin-detail-toolbar { flex-wrap: wrap; }
+html[lang="ru"] .admin-view-banner { flex-wrap: wrap; }
+html[lang="ru"] .admin-summary-card>span { align-items: flex-start; line-height: 1.6; }
+@media(max-width: 1150px) {
+  .topbar { flex-wrap: wrap; height: auto; min-height: 88px; padding: 12px 0; }
+  .account-actions { margin-left: auto; }
+  html[lang="ru"] .overview { grid-template-columns: 1fr; }
+  html[lang="ru"] .balance-caption { max-width: 100%; }
+}
+@media(max-width: 620px) {
+  .topbar { position: relative; padding-top: 53px; padding-bottom: 10px; min-height: 104px; gap: 6px; }
+  .topbar .language-switch { position: absolute; top: 7px; right: 0; }
+  .breadcrumb::after { content: attr(data-brand); }
+  .account-actions { gap: 8px; }
+  html[lang="ru"] .breadcrumb::after { font-size: 19px; letter-spacing: -.6px; }
+  html[lang="ru"] .breadcrumb::before { font-size: 24px; }
+  html[lang="ru"] .greeting h1 { font-size: 27px; line-height: 1.35; }
+  html[lang="ru"] .page-diary .section-heading h2 { font-size: 21px; }
+  html[lang="ru"] .section-heading { align-items: flex-start; }
+  html[lang="ru"] .text-button { max-width: 105px; text-align: left; flex-shrink: 0; line-height: 1.5; }
+  html[lang="ru"] .date-toolbar { gap: 5px; padding-right: 8px; }
+  html[lang="ru"] .date-control { font-size: 11px; }
+  html[lang="ru"] .date-picker { min-width: 0; }
+  html[lang="ru"] .today-button { flex-shrink: 0; padding: 6px 8px; }
+  html[lang="ru"] .ledger-table th { font-size: 10px; }
+  html[lang="ru"] .daily-total { padding-left: 12px; padding-right: 12px; }
+  html[lang="ru"] .daily-total>span { line-height: 1.6; }
+  html[lang="ru"] .daily-total>span>small { font-size: 9px; }
+  html[lang="ru"] .add-record-wrap>span { text-align: center; font-size: 10px; line-height: 1.6; }
+  html[lang="ru"] .mobile-nav { padding-left: 5px; padding-right: 5px; align-items: stretch; }
+  html[lang="ru"] .mobile-nav button { padding: 4px 3px; font-size: 10px; line-height: 1.35; }
+  html[lang="ru"] .modal-heading h2 { font-size: 20px; line-height: 1.4; }
+  html[lang="ru"] .admin-summary-grid { grid-template-columns: 1fr; }
+  html[lang="ru"] .admin-summary-card { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  html[lang="ru"] .admin-summary-card strong { margin-top: 0; flex-shrink: 0; max-width: 60%; }
+  html[lang="ru"] .admin-summary-card>span { font-size: 12px; }
+  html[lang="ru"] .admin-period { gap: 6px; }
+  html[lang="ru"] .admin-period input { margin-left: 0; }
+  html[lang="ru"] .admin-page-heading h1 { font-size: 24px; }
+  html[lang="ru"] .admin-badge { align-self: flex-start; margin-top: 8px; }
+  html[lang="ru"] .chart-row { gap: 7px; }
+  html[lang="ru"] .stat-count { margin-left: 0; }
+}
+@media(max-width: 370px) {
+  html[lang="ru"] .breadcrumb::after { font-size: 17px; }
+  html[lang="ru"] .breadcrumb::before { margin-right: 3px; font-size: 21px; }
+  html[lang="ru"] .account-button>span:nth-child(2) { max-width: 56px; }
+  html[lang="ru"] .greeting h1 { font-size: 25px; }
+  html[lang="ru"] .date-picker .icon-button { min-width: 29px; }
+  html[lang="ru"] .date-control { font-size: 10px; }
+  html[lang="ru"] .today-button { font-size: 10px; }
+  html[lang="ru"] .modal { padding: 18px; }
+  html[lang="ru"] .stats-highlight>div { flex: 1; }
+}
